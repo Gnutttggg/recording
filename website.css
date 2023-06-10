@@ -45,7 +45,17 @@ body {
   border-radius: 50%;
 }
 
+label[for="autoRecordCheckbox"] {
+font-size: 16px;
 
+  color: black;
+  margin-top: 1%
+}
+
+#autoRecordCheckbox {
+  margin-left: 55%;
+
+}
       
       button {
         display: block;
