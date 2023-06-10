@@ -787,7 +787,9 @@ function createDropDown(label, options, parentElement) {
 const recordButton = document.getElementById("recordButton");
 const audioPlayer = document.getElementById("audioPlayer");
 const autoRecordCheckbox = document.getElementById("autoRecordCheckbox");
+const autoRecordLabel = document.querySelector('label[for="autoRecordCheckbox"]');
 starredoverlay.appendChild(autoRecordCheckbox);
+starredoverlay.appendChild(autoRecordLabel);
 const overlay = document.getElementById("overlay");
 const demoOverlay = document.getElementById("demoOverlay");
 const audioPlayerOverlay = document.createElement("div");
