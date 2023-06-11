@@ -45,17 +45,7 @@ body {
   border-radius: 50%;
 }
 
-label[for="autoRecordCheckbox"] {
-font-size: 16px;
 
-  color: black;
-  margin-top: 1%
-}
-
-#autoRecordCheckbox {
-  margin-left: 55%;
-
-}
       
       button {
         display: block;
@@ -97,9 +87,9 @@ font-size: 16px;
 
 #filterHeading {
   color: white !important;
-  font-weight: bold;
+  font-weight: normal;
   position: fixed;
-  top: 11%;
+  top: 5%;
   left: 2%;
 }
 
@@ -117,16 +107,7 @@ font-size: 16px;
   border-right: 5px solid black; /* Adjust the border thickness and color as needed */
 }
 
-.topoverlay {
-  position: fixed;
-  top: 0px;
-  left: 0;
-  width: 100%; /* Adjust the width as needed */
-  height: 11%;
-  background-color: black;
-  opacity: 0.9; /* Adjust the opacity as needed */
-  z-index: 4;
-}
+
 
 .starredoverlay {
   position: absolute;
@@ -134,12 +115,12 @@ font-size: 16px;
   justify-content: flex-start; /* Align items to the start of the main axis */
   top: 200px;
   left: 0;
-  width: 50.9%; /* Adjust the width as needed */
+  width: 70%; /* Adjust the width as needed */
   height: 7%;
   background-color: whitesmoke;
   opacity: 1;
   z-index: 9999;
-  margin-left: 37.5%;
+  margin-left: 27.5%;
   margin-bottom: 10%;
 }
 
@@ -189,7 +170,7 @@ font-size: 16px;
 
 .too-early-button.clicked,
 .too-late-button.clicked {
-  animation: flashAnimation 0.75s;
+  animation: flashAnimation 0.2s;
 }
 
 
@@ -202,10 +183,10 @@ font-size: 16px;
 .headphone-container {
   position: absolute;
   display: flex;
-  flex-direction: row; /* Align items vertically from top to bottom */
+  flex-direction: column; /* Align items vertically from top to bottom */
   justify-content: flex-start;
   align-items: center; /* Align items horizontally */
-  margin-left: 17%;
+  margin-left: 52%;
   background-color: transparent;
   height: 70px;
 }
@@ -213,10 +194,20 @@ font-size: 16px;
 .headphone-label {
   margin-bottom: 0.5px; /* Adjust the margin as needed */
   color: black;
-  font-size: 14px;
+  font-size: 16px;
+  font-weight: bold;
 }
 
-
+.auto-record-container {
+  position: absolute;
+  display: flex;
+  flex-direction: column; /* Align items vertically from top to bottom */
+  justify-content: flex-start;
+  align-items: center; /* Align items horizontally */
+margin-left: 22%;
+  background-color: transparent;
+  height: 70px;
+}
 
 
 .controls {
@@ -232,14 +223,7 @@ audio {
   margin: 0 auto;
 }
 
-.container {
-  display: flex; /* Change display to flex */
-  flex-wrap: wrap;
-  justify-content: flex-start; /* Align items to the left */
-  height: calc(100% - 20px); /* subtract margin from height */
-  margin-top: 55px;
-  margin-bottom: 20%;
-}
+
 
 .pulsing-circle {
   position: absolute;
@@ -253,7 +237,7 @@ audio {
   box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.6);
 display: none; 
   animation: pulsingCircle 2s infinite;
-  z-index: 9999;
+  z-index: 999;
 }
 
 @keyframes pulsingCircle {
@@ -268,12 +252,20 @@ display: none;
   }
 }
 
-
+.container {
+  display: flex; /* Change display to flex */
+  flex-wrap: wrap;
+  justify-content: flex-start; /* Align items to the left */
+  height: calc(100% - 20px); /* subtract margin from height */
+  margin-top: 55px;
+  margin-bottom: 20%;
+  width: 70%;
+}
 
 .grid-item {
   position: relative;
   flex: none;
-  width: 50%;
+  width: 100%;
   height: 50px;
   background-color: #eaeaea;
   border: 1px solid #ccc;
@@ -288,9 +280,12 @@ display: none;
 .show-starred-container {
     position: absolute;
   display: flex; 
+  flex-direction: column;
   justify-content: flex-start;
+  align-items: center; /* Align items horizontally */
   margin-left: 2.7%;
 }
+
 #showStarredButton {
   background: transparent;
   font-size: 24px; /* Increase the star size */
@@ -377,26 +372,29 @@ display: none;
   justify-content: center;
 
 }
+
 .track-name {
   font-weight: bold;
-  margin-left: 5%;
+  margin-left: 80%;
   display: flex;
   white-space: nowrap;
+  position: absolute;
 }
-
-
 .overlay-track-name {
   font-weight: bold;
   margin-left: 1%;
+  position: fixed;
 }
 .overlay-star {
   margin-left: 13%;
+  position: fixed;
 }
 .overlay-find-button {
   margin-left: 13%;
   bottom: 7px;
     font-size: 15px; /* Increase the button size */
   font-style: normal;
+  position: fixed;
 }
 
 .play-pause-button {
@@ -448,12 +446,103 @@ display: none;
   box-shadow: none;
       }
 
+.tooltip {
+  position: absolute;
+  top: -50px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.bookmarkTooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.recordTooltip {
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+
+
+label[for="autoRecordCheckbox"] {
+font-size: 16px;
+font-weight: bold;
+  color: black;
+}
+
+
+
+.volume-control {
+  align-items: center;
+  position: absolute;
+  margin-left: 91%;
+  top: 25px;
+  z-index: 999;
+  background-color: transparent;
+  width: 100px;
+  height: 40px;
+  color: white;
+}
+
+
+.volume-control .speaker-symbol {
+  position: relative; /* Add position relative to keep its position within the div */
+  transition: opacity 0.3s; /* Add transition effect for smooth visibility change */
+  color: black;
+}
+
+.volume-control input[type="range"] {
+  display: none;
+  position: absolute;
+  width: 55px;
+  height: 20px;
+  left: -6px;
+  top: -12px; /* Adjust the top position to allow overflow out of the div on top */
+  transform: rotate(-90deg);
+  transform-origin: center;
+  overflow: visible; /* Allow the slider to overflow out of the div */
+}
+
+
+
+.volume-control:hover .speaker-symbol {
+  opacity: 0.65; /* Hide the volume up symbol */
+}
+
+.volume-control:hover input[type="range"] {
+  display: block;
+}
+
+
+
 
 
 
 #demoPlayer {
+
   display: none;
 }
+
 
 
 .demo-button {
@@ -570,7 +659,14 @@ display: none;
   color: white;
   padding: 10px;
   z-index: 1003;
+  
+  /* Invert the colors */
+  filter: invert(100%);
+  -webkit-filter: invert(100%);
+
 }
+
+
 
 .demo-label {
   margin-left: 15%; /* Adjust the margin as needed */
@@ -607,7 +703,7 @@ position: fixed;
 
 .upload-container {
   position: fixed;
-  top: 75px;
+  top: 5%;
   left: 190px;
 }
 
@@ -620,6 +716,8 @@ position: fixed;
   box-shadow: none;
   color: white;
   font-size: 24px;
+  margin-top: 0px;
+  font-weight: bold;
 }
 
 .demo-container {
@@ -649,10 +747,11 @@ position: fixed;
   height: 80px;
   width: 185px;
   display: none;
-  margin-top: 1%;
+  top: 5%;
 left: 0;
   z-index: 0;
   pointer-events: auto;
+  font-weight: bold;
   cursor: pointer;
   position: fixed;
 }
@@ -665,7 +764,7 @@ left: 0;
   justify-content: center;
   height: 100%;
   font-size: 24px;
-  font-weight: normal;
+  font-weight: bold;
   color: white;
   width: 100%;
 }
@@ -688,6 +787,23 @@ left: 0;
   cursor: pointer;
       }
 
+@keyframes flashing {
+  0% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.7;
+  }
+}
+
+.recording {
+  animation: flashing 2s infinite;
+}
+
+
 
 #overlay {
   position: fixed;
@@ -702,18 +818,6 @@ left: 0;
   z-index: 3000;
 }
 
-#demoOverlay {
-  position: fixed;
-  display: block;
-  top: 20px;
-  left: 10%;
-  width: 70%;
-  height: 8%;
-  background-color: black;
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 9900;
-}
 
 .trackOverlay {  
   position: absolute;
@@ -756,11 +860,9 @@ label {
 }
 
 
-.volume-control {
-  position: fixed;
-  right: 39px;
-  top: 10px;
-}
+
+
+
 
 .record-again-button {
   display: none;
