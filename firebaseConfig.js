@@ -9,13 +9,17 @@
   appId: "1:267445828891:web:db04bbca72d8efd85227be",
   measurementId: "G-ZXG9GRGNVE"
     };
+
+
     
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
-
+  const database = firebase.database();
 const storage = firebase.storage();
 const storageRef = storage.ref();
+
+
 
 function uploadAudioFile(file) {
   const audioRef = storageRef.child(`audio/${file.name}`);
@@ -23,28 +27,10 @@ function uploadAudioFile(file) {
 }
 
 function saveTrackInfo(trackData) {
-  const database = firebase.database();
   const trackRef = database.ref('tracks').push();
   return trackRef.set(trackData)
     .then(() => trackRef.key);
 }
-
-function saveTextElements(genre, key, rhythm, color, intensity, instrument, chords) {
-  const trackData = {
-    audioUrl: "",
-    genre: genre,
-    key: key,
-    rhythm: rhythm,
-    color: color,
-    intensity: intensity,
-    instrument: instrument,
-    chords: chords,
-    links: links
-  };
-
-  return saveTrackInfo(trackData);
-}
-
 
 
 function fetchTrackData() {
@@ -59,3 +45,20 @@ function fetchTrackData() {
     });
 }
 
+
+
+function retrieveTrackInfo(trackId) {
+  return new Promise((resolve, reject) => {
+    // Assuming you have initialized Firebase and have a reference to your database
+    const trackRef = firebase.database().ref('tracks/' + trackId);
+    
+    trackRef.once('value')
+      .then((snapshot) => {
+        const trackData = snapshot.val();
+        resolve(trackData);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
+}
