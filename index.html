@@ -5,9 +5,12 @@
     <link rel="stylesheet" href="dropdowns.css"> <!-- Link to dropdowns.css -->
     <link rel="stylesheet" href="filters.css">
     <link rel="stylesheet" href="signup.css">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <meta charset="UTF-8">
     <title>Record something.</title>
+
   </head>
 
 <h2 id="title">Tracks</h2>
@@ -16,7 +19,7 @@
   <body>
     <div class="filteroverlay"></div>
     <div class="starredoverlay"></div>
-    <div class="topoverlay"></div>
+   
     <div class="button-container">
       <button id="recordButton"><i class="fas fa-microphone"></i></button>
     </div>
@@ -24,7 +27,7 @@
     <button id="bookmarkDemoButton">&#9658</button>
 
     <div id="overlay"></div>
-    <div id="demoOverlay"></div>
+
     <div id="trackOverlay"></div>
     <div id="chooseFilterOverlay"></div>
 
@@ -40,11 +43,15 @@
 <audio id="gridAudioPlayer" controls></audio>
 
 
-    <audio id="demoPlayer" controls></audio>
-    <div class="volume-control">
-  <label for="volumeSlider">Vocal's Volume:</label>
+<div class="volume-control">
+  <span class="speaker-symbol fas fa-volume-up"></span>  
   <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="1">
 </div>
+
+<audio id="demoPlayer" controls></audio>
+
+
+
     
 
 
@@ -70,8 +77,11 @@
 
 <div class="allfilters">
   <h2 id="filterHeading">Find tracks</h2>
-  <h3 id="specificFilterHeading">Specific search:</h3>
+<h3 id="specificFilterHeading">Specific intro description <span class="question-icon">?</span></h3>
+
+
 <div class="intro-container">
+
 <div class="rhythmfilter-container">
 <label for="rhythmfilter">Rhythm:</label>
 <select id="rhythmfilter">
@@ -124,7 +134,7 @@
   <option value="Banjo">Banjo</option>
   <option value="Sitar">Sitar</option>
   <option value="Harmonica">Harmonica</option>
-  <option value="Ukelele">Ukelele</option>
+  <option value="Ukulele">Ukulele</option>
 </select>
 </div>
    </div>
@@ -190,10 +200,10 @@
 
 
 
-
+<div class="auto-record-container">
 <label for="autoRecordCheckbox">Auto record</label>
 <input type="checkbox" id="autoRecordCheckbox">
-
+</div>
 
 
 
@@ -219,9 +229,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-storage.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
-
-
-
 
 
 
