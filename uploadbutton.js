@@ -10,8 +10,7 @@ const bookmarkButton = document.getElementById("bookmarkButton");
 const pulsingCircle = document.createElement("div");
 pulsingCircle.classList.add("pulsing-circle");
 const demoPlayer = document.getElementById("demoPlayer");
-  const volumeControlDiv = document.querySelector('.volume-control');
-  volumeControlDiv.style.display = 'none';
+
 const bookmarkDemoButton = document.getElementById("bookmarkDemoButton");
 bookmarkDemoButton.style.display = "none";
 const selectFileButton = document.createElement("button");
@@ -35,7 +34,7 @@ uploadButton.addEventListener("click", function() {
   selectFileButton.style.display = "block";
   uploadHeading.style.display = "block";
   uploadButton.style.backgroundColor = "transparent";
-  uploadButton.style.fontWeight = "bold";
+  uploadButton.style.fontWeight = "normal";
   chooseFilterOverlay.style.display = "block";
 
 
@@ -56,7 +55,7 @@ chooseFilterOverlay.addEventListener("click", function(event) {
   selectFileButton.style.display = "none";
   uploadHeading.style.display = "none";
   uploadButton.style.backgroundColor = "black";
-  uploadButton.style.fontWeight = "normal";
+  uploadButton.style.fontWeight = "bold";
   chooseFilterOverlay.style.display = "none";
   event.stopPropagation();
 
@@ -124,31 +123,31 @@ fileInput.addEventListener("change", function(event) {
       // Increment the track count for the next upload
       trackCount++;
 
-
-      // Create the genre select dropdown      
-      const genreSelect = createDropDown("Genre", ["", "Pop", "Rock", "Jazz", "Hip-Hop", "Trap", "RnB", "Electronic", "Reggae", "Latin", "Funk/Soul", "Country","Folk", "Blues"], modal.content);
-      // Create the key select dropdown
-      const keySelect = createDropDown("Key", ["", "C", "Cm", "C#", "C#m", "D", "Dm", "Eb", "Ebm", "E", "Em", "F", "F#", "Fm", "F#m", "G", "G#", "Gm", "G#m", "A", "Am", "Bb", "Bbm", "B", "Bm"], modal.content);
-
+  
+     
       // Create the intro description drop-down selections
       const rhythmSelect = createDropDown("Rhythm", ["", "Dynamic", "Smooth", "Sliding", "Drifting"], modal.content);
       const colorSelect = createDropDown("Color", ["", "Warm", "Cold", "Colorful", "Stark"], modal.content);
       const intensitySelect = createDropDown("Intensity", ["", "Aggressive", "Soft", "Moderate"], modal.content);
-      const instrumentSelect = createDropDown("Instrument", ["", "Drum-and-bass", "Guitar", "Electric guitar", "Pluck", "Bass", "Strings", "Piano", "Synth", "Flute", "Violin", "Brass", "Vocal sample", "Sound FX", "Banjo", "Sitar", "Harmonica", "Ukelele"], modal.content);
+      const instrumentSelect = createDropDown("Instrument", ["", "Drum-and-bass", "Guitar", "Electric guitar", "Pluck", "Bass", "Strings", "Piano", "Synth", "Flute", "Violin", "Brass", "Vocal sample", "Sound FX", "Banjo", "Sitar", "Harmonica", "Ukulele"], modal.content);
       const chordSelects = [];
 
       for (let i = 1; i <= 8; i++) {
         const chordSelect = createDropDown(`chord ${i}`, ["", "I", "ii", "iii", "IV", "V", "vi", "vii"], modal.content);
         chordSelects.push(chordSelect);
       }
+ const genreSelect = createDropDown("Genre", ["", "Pop", "Rock", "Jazz", "Hip-Hop", "Trap", "RnB", "Electronic", "Reggae", "Latin", "Funk/Soul", "Country","Folk", "Blues"], modal.content);
+      // Create the key select dropdown
+      const keySelect = createDropDown("Key", ["", "C", "Cm", "C#", "C#m", "D", "Dm", "Eb", "Ebm", "E", "Em", "F", "F#", "Fm", "F#m", "G", "G#", "Gm", "G#m", "A", "Am", "Bb", "Bbm", "B", "Bm"], modal.content);
 
       // Add a CSS class to the container elements -> To fix their position
-      genreSelect.container.classList.add("dropdown-genre");
-      keySelect.container.classList.add("dropdown-key");
+      
       rhythmSelect.container.classList.add("dropdown-rhythm");
       colorSelect.container.classList.add("dropdown-color");
       intensitySelect.container.classList.add("dropdown-intensity");
       instrumentSelect.container.classList.add("dropdown-instrument");
+      genreSelect.container.classList.add("dropdown-genre");
+      keySelect.container.classList.add("dropdown-key");
 
 chordSelects.forEach((chordSelect, index) => {
   const chordContainerClass = `dropdown-chord-${index + 1}`;
@@ -186,7 +185,7 @@ for (let i = 1; i <= 3; i++) {
         filtersContainer.style.display = "block";
         uploadHeading.style.display = "none";
         uploadButton.style.backgroundColor = "black";
-      uploadButton.style.fontWeight = "normal";
+      uploadButton.style.fontWeight = "bold";
         chooseFilterOverlay.style.display = "none";
         searchContainer.style.display = "block";
   
@@ -222,7 +221,7 @@ for (let i = 1; i <= 3; i++) {
   playPauseButton.classList.add('play-pause-button');
 playPauseButton.innerHTML = "&#9654;";
 newGridItem.appendChild(playPauseButton);
-newGridItem.appendChild(audioPlayer);
+
 
 let playbackPosition = 0; // Variable to store the current playback position
 let isAudioPlaying = false;
@@ -245,7 +244,14 @@ overlayTrackName.style.color = "white";
 overlayTrackName.style.position = "fixed";
 overlayTrackName.style.left = "30px";
 overlayTrackName.textContent = "Playing: " + trackName;
+// Listen for play and pause events on the grid audio player
+gridAudioPlayer.addEventListener("play", function() {
+  overlayTrackName.textContent = "Demo: " + trackName;
+});
 
+audioPlayer.addEventListener("play", function() {
+  overlayTrackName.textContent = "Playing: " + trackName;
+});
 
 const audioPlayerOverlay = document.getElementById("audioPlayerOverlay");
 
@@ -373,9 +379,8 @@ linkValues.forEach((value, index) => {
 showAudioPlayer();  
 gridAudioPlayer.pause();
 overlay.style.display = "none";
-demoOverlay.style.display = "block";
-demoOverlay.style.pointerEvents = "auto";
-//headphoneButtonContainer.style.display = "block";
+
+
 
   const currentlyPlaying = document.querySelector(".grid-item .play-pause-button[data-playing='true']");
   
@@ -440,6 +445,7 @@ starButton.addEventListener("click", function() {
 
     console.log(`Unstarred track: ${trackName}`); // Log the track name when unstarred
   }
+
 
 });
 
@@ -570,6 +576,7 @@ uploadAudioFile(file)
     // Save track information (including text elements) to Firebase Realtime Database
     const linkInputs = linkInputsContainer.querySelectorAll("input");
     const linkValues = Array.from(linkInputs).map((input) => input.value);
+    const isStarred = false;
     const trackData = {
       audioUrl: audioUrl,
       genre: genreSelect.value,
@@ -579,7 +586,8 @@ uploadAudioFile(file)
       intensity: intensitySelect.value,
       instrument: instrumentSelect.value,
       chords: JSON.stringify(chordValues),
-      links: linkValues
+      links: linkValues,
+      isStarred: isStarred
     };
 
     return saveTrackInfo(trackData);
@@ -618,14 +626,15 @@ newGridItem.appendChild(contentContainer);
 
 
       // Add the drop-downs and submit button to the modal dialog
-      modal.content.appendChild(genreSelect.container);
-      modal.content.appendChild(keySelect.container);
+      
       modal.content.appendChild(rhythmSelect.container);
       modal.content.appendChild(colorSelect.container);
       modal.content.appendChild(intensitySelect.container);
       modal.content.appendChild(instrumentSelect.container);
       chordSelects.forEach(chordSelect => {
         modal.content.appendChild(chordSelect.container);
+        modal.content.appendChild(genreSelect.container);
+      modal.content.appendChild(keySelect.container);
         modal.content.appendChild(linkInputsContainer);
       });
 
@@ -788,10 +797,12 @@ const recordButton = document.getElementById("recordButton");
 const audioPlayer = document.getElementById("audioPlayer");
 const autoRecordCheckbox = document.getElementById("autoRecordCheckbox");
 const autoRecordLabel = document.querySelector('label[for="autoRecordCheckbox"]');
-starredoverlay.appendChild(autoRecordCheckbox);
-starredoverlay.appendChild(autoRecordLabel);
+const autoRecordContainer = document.querySelector(".auto-record-container");
+autoRecordContainer.appendChild(autoRecordLabel);
+autoRecordContainer.appendChild(autoRecordCheckbox);
+starredoverlay.appendChild(autoRecordContainer);
 const overlay = document.getElementById("overlay");
-const demoOverlay = document.getElementById("demoOverlay");
+
 const audioPlayerOverlay = document.createElement("div");
 const buttonContainer = document.querySelector(".button-container");
 let permissionGranted = false;
@@ -804,7 +815,17 @@ gridAudioPlayer.style.display = "none";
 
 audioPlayerOverlay.id = "audioPlayerOverlay";
 document.body.appendChild(audioPlayerOverlay);
+starredoverlay.appendChild(demoPlayer);
 
+const volumeSlider = document.getElementById("volumeSlider");
+volumeSlider.addEventListener("input", function() {
+  demoPlayer.volume = volumeSlider.value;
+});
+
+const volumeControlDiv = document.querySelector(".volume-control");
+
+
+starredoverlay.appendChild(volumeControlDiv);
 
 function showAudioPlayer() {
   audioPlayer.style.display = "block";
@@ -812,7 +833,7 @@ function showAudioPlayer() {
   buttonContainer.style.display = "block";
   recordButtonOverlay.style.display = "block";
   bookmarkButton.style.display = "block";
-  
+
   gridAudioPlayer.style.display = "none";
   
 }
@@ -823,9 +844,10 @@ function showDemoPlayer() {
   buttonContainer.style.display = "block";
   recordButtonOverlay.style.display = "block";
   bookmarkButton.style.display = "block";
-  
+
   gridAudioPlayer.style.display = "block";
 }
+
 
 navigator.mediaDevices.getUserMedia({ audio: true })
   .then(function (streamObj) {
@@ -843,10 +865,11 @@ const tooContainer = document.createElement("div");
 tooContainer.classList.add("too-container");
 const label = document.createElement("label");
 const tooQuestion = document.createElement("span");
-tooQuestion.textContent = "How's your vocal playback?";
+tooQuestion.textContent = "Vocal playback";
+tooQuestion.style.fontWeight = "bold";
 tooQuestion.style.color = "black";
-tooQuestion.style.marginLeft = "70%";
-tooQuestion.style.fontSize = "14px";
+tooQuestion.style.marginLeft = "78%";
+tooQuestion.style.fontSize = "16px";
 tooQuestion.style.width = "500px";
 
 starredoverlay.appendChild(tooQuestion);
@@ -913,8 +936,9 @@ headphoneCheckbox.addEventListener("change", function() {
 const headphoneContainer = document.createElement("div");
 headphoneContainer.classList.add("headphone-container");
 
-headphoneContainer.appendChild(headphoneCheckbox);
 headphoneContainer.appendChild(headphoneLabel);
+headphoneContainer.appendChild(headphoneCheckbox);
+
 headphoneCheckbox.classList.add("headphone-checkbox");
 headphoneLabel.classList.add("headphone-label");
 
@@ -940,6 +964,7 @@ function toggleRecording() {
   if (isRecording) {
     mediaRecorder.stop();
     isRecording = false;
+    recordButton.classList.remove("recording");
   }
 });
 
@@ -985,7 +1010,7 @@ if (recordButton.innerHTML === '<i class="fas fa-microphone"></i>') {
     if (audioPlayer && audioPlayer.src !== "" && !audioPlayer.paused) {
 
 
-
+recordButton.classList.add("recording");
       recordingStartTime = audioPlayer.currentTime;
 
       mediaRecorder = new MediaRecorder(stream); 
@@ -1012,8 +1037,8 @@ if (recordButton.innerHTML === '<i class="fas fa-microphone"></i>') {
 
 
       mediaRecorder.addEventListener("stop", function () {
-        
-pulsingCircle.style.display = "none";
+        recordButton.classList.remove("recording");
+        pulsingCircle.style.display = "none";
         overlay.style.display = "none";
         gridAudioPlayer.currentTime = 0;
 const gridItems = document.querySelectorAll(".grid-item");
@@ -1092,11 +1117,6 @@ function playDemoPlayer(gridItem) {
   demoRecording.src = demoButton.getAttribute("data-audio-url"); // Retrieve the recorded audio URL from the button
 
   
-
-volumeSlider.addEventListener("input", function() {
-  const volume = parseFloat(volumeSlider.value);
-  demoPlayer.volume = volume;
-});
   const url = demoRecording.src;
 
   if (!demoPlayer.paused && demoPlayer.src === url) {
@@ -1108,7 +1128,7 @@ volumeSlider.addEventListener("input", function() {
     demoPlayer.play();
   }
   demoPlayer.style.display = "none"; // Show the demo audio player
-  volumeControlDiv.style.display = 'block';
+
 }
 
 
@@ -1170,8 +1190,7 @@ currentGridItem.appendChild(demoPlayPause);
 
 currentGridItem.appendChild(recordAgainText);
     demoPlayPause.innerHTML = "";
-    demoOverlay.style.display = "none";
-    demoOverlay.style.pointerEvents = "none";
+
         if (gridAudioPlayer.paused) {
       demoPlayPause.innerHTML = pauseSymbol;
     } else {
@@ -1204,10 +1223,6 @@ currentGridItem.appendChild(recordAgainText);
     if (previousDemoRecording) {
       previousDemoRecording.parentNode.removeChild(previousDemoRecording);
     }
-
-
-
-
 
 
   });
@@ -1440,15 +1455,6 @@ audioPlayer.addEventListener("loadeddata", function() {
   }
 });
 
-gridAudioPlayer.addEventListener("loadeddata", function() {
-  // Delete the bookmark when the audio player's source changes
-  if (isBookmarkClicked) {
-    bookmarkTime = null;
-
-    bookmarkButton.classList.remove("clicked");
-    isBookmarkClicked = false;
-  }
-});
 
 
 
@@ -1460,3 +1466,5 @@ bookmarkDemoButton.addEventListener("click", function () {
     audioPlayer.currentTime = bookmarkTime / 1000; // Convert bookmark time to seconds
   }
 });
+
+
