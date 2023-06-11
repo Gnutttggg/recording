@@ -9,6 +9,35 @@
   left: 20px;
 }
 
+.questionTooltip {
+  position: absolute;
+  top: -50px;
+  left: 100%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  border-radius: 2px;
+  font-size: 10px;
+}
+
+.question-icon {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-color: #1E90FF;
+  border-radius: 50%;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  line-height: 24px;
+  content: "?";
+}
+
+
+
 #chordFiltersContainer {
   position: fixed;
   top: 40%;
