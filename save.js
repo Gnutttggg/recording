@@ -20,6 +20,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const audioElement = document.createElement("audio");
         audioElement.src = track.audioUrl;
         audioElement.controls = true;
+
+          if (track.recordedAudioUrl) {
+          const recordedAudio = document.createElement("audio");
+          recordedAudio.src = track.recordedAudioUrl;
+          newGridItem.appendChild(recordedAudio);
+        }
+       
         // Create a container for the audio intro element
       const audioIntroContainer = document.createElement("div");
       audioIntroContainer.classList.add("audio-intro-container");
@@ -103,7 +110,14 @@ overlayTrackName.style.color = "white";
 overlayTrackName.style.position = "fixed";
 overlayTrackName.style.left = "30px";
 overlayTrackName.textContent = "Playing: " + trackName;
+// Listen for play and pause events on the grid audio player
+gridAudioPlayer.addEventListener("play", function() {
+  overlayTrackName.textContent = "Demo: " + trackName;
+});
 
+audioPlayer.addEventListener("play", function() {
+  overlayTrackName.textContent = "Playing: " + trackName;
+});
 
 const audioPlayerOverlay = document.getElementById("audioPlayerOverlay");
 
@@ -229,8 +243,6 @@ overlayFindButton.addEventListener("click", function () {
 showAudioPlayer();  
 gridAudioPlayer.pause();
 overlay.style.display = "none";
-demoOverlay.style.display = "block";
-demoOverlay.style.pointerEvents = "auto";
 
 //headphoneButtonContainer.style.display = "block";
 
@@ -395,7 +407,7 @@ newGridItem.appendChild(contentContainer);
         newGridItem.appendChild(audioElement);
         audioElement.style.display = "none";
 
-newGridItem.appendChild(audioPlayer);
+
         // Add the grid item to the grid container
         container.appendChild(newGridItem);
 const showStarredButton = document.getElementById("showStarredButton");
@@ -409,6 +421,7 @@ for (const item of gridItems) {
 }
 
 showStarredButton.addEventListener("click", function() {
+
   // Toggle the filter state
   isFilterActive = !isFilterActive;
 
@@ -432,12 +445,15 @@ showStarredButton.addEventListener("click", function() {
     // Iterate through all grid items and hide them by default
     for (const item of gridItems) {
       item.style.display = "none";
+
     }
 
     // Show only the starred grid items
     for (const item of starredGridItems) {
       item.style.display = "block";
+
     }
+
 
     showStarredButton.classList.add("active");
     starIcon.style.color = "yellow"; // Set the star icon color to yellow
@@ -460,5 +476,3 @@ showStarredButton.addEventListener("click", function() {
     });
 
 });
-
-
